@@ -1,0 +1,11 @@
+.navbar {
+  background: rgb(202, 247, 250);
+}
+
+.cover {
+  width: 70px;
+}
+
+.table > tbody > tr > * {
+  vertical-align: middle;
+}
