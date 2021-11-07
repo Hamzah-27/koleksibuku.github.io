@@ -12,10 +12,21 @@ class Buku extends BaseController
     }
     public function index()
     {
-   
+        $currentPage = $this -> request -> getVar('page_buku') ? $this -> request -> getVar('page_buku') : 1 ;
+
+        $cari = $this->request->getVar('cari');
+        if ($cari) {
+            $buku = $this->bukuModel->search($cari);
+        } else {
+            $buku = $this->bukuModel;
+        }
+        
         $data = [
             'title' => 'KoleksiBuku | Collection',
-            'buku'  =>  $this->bukuModel->getBuku()
+            // 'buku'  => $this->bukuModel->getBuku(),
+            'buku'  => $buku -> paginate(4,'buku'),
+            'pager' => $this->bukuModel->pager,
+            'currentPage'   => $currentPage
         ];
 
         return view('buku/index', $data);
